@@ -30,7 +30,7 @@ class LogGenerator:
         return _list[randrange(len(_list))]
 
     def write(self):
-        f = open(self.file_name, "w+")
+        f = open(self.file_name, "a")
         now = datetime.now()
         timestamp = now.strftime("%Y-%m-%dT%H:%M:%S.%f")
         level = self.randomVal(self.levels)
