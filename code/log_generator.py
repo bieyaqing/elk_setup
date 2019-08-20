@@ -13,6 +13,7 @@ class LogGenerator:
         self.ipaddr = gethostbyname(gethostname())
         self.file = open(f"/home/logs/{now_date_str}.log", "w+")
         self.levels = ["INFO", "DEBUG", "WARNING", "ERROR"]
+        self.ports = [4500, 4501, 4502, 4503]
         self.msgs = [
             "For a datetime instance d, str(d) is equivalent to d.isoformat(' ').",
             "All arguments are optional. tzinfo may be None, or an instance of a tzinfo subclass.",
@@ -32,9 +33,9 @@ class LogGenerator:
         now = datetime.now()
         timestamp = now.strftime("%Y-%m-%dT%H:%M:%S.%f")
         level = self.randomVal(self.levels)
+        port = self.randomVal(self.ports)
         msg = self.randomVal(self.msgs)
         self.file.write(f"[{level}][{self.ipaddr}][{timestamp}] {msg}\r\n")
-
 
 if __name__ == "__main__":
     lg = LogGenerator()

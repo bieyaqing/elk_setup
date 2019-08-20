@@ -28,10 +28,32 @@ docker-compose up ubuntu
 filter {
   if [type] == "log" {
     grok {
-      match => { "message" => "\[%{WORD:level}\]\[%{IP:ipaddr}\]\[%{TIMESTAMP:timestamp}\] %{GREEDYDATA:message}" }
+      match => { "message" => "\[%{WORD:log_level}\]\[%{IP:log_ipaddr}\]\[%{TIMESTAMP:log_timestamp}\] %{GREEDYDATA:message}" }
     }
   }
 }
 ```
 ### Link
 https://github.com/elastic/logstash/blob/v1.4.2/patterns/grok-patterns
+
+## Filebeat Config
+```
+filebeat modules enable system
+```
+```yml
+filebeat.inputs:
+- type: syslog
+  enabled: true
+  paths:
+    - /home/logs/*.log
+setup.kibana:
+  host: "172.17.0.2:5601"
+filebeat.config.modules:
+  path: ${path.config}/modules.d/*.yml
+  reload.enabled: false
+setup.template.settings:
+  index.number_of_shards: 1
+output.logstash:
+  enabled: true
+  hosts: ["172.17.0.2:5044"]
+```
