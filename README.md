@@ -28,7 +28,7 @@ docker-compose up ubuntu
 filter {
   if [type] == "log" {
     grok {
-      match => { "message" => "\[%{WORD:log_level}\]\[%{IP:log_ipaddr}\]\[%{TIMESTAMP:log_timestamp}\] %{GREEDYDATA:message}" }
+      match => { "message" => "%{WORD:log_level} %{GREEDYDATA:message}" }
     }
   }
 }
