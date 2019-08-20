@@ -11,7 +11,7 @@ class LogGenerator:
         now = datetime.now()
         now_date_str = now.strftime("%Y-%m-%d")
         self.ipaddr = gethostbyname(gethostname())
-        self.file = open(f"/home/logs/{now_date_str}.log", "w+")
+        # self.file = open(f"/home/logs/{now_date_str}.log", "w+")
         self.levels = ["INFO", "DEBUG", "WARNING", "ERROR"]
         self.ports = [4500, 4501, 4502, 4503]
         self.msgs = [
@@ -35,7 +35,9 @@ class LogGenerator:
         level = self.randomVal(self.levels)
         port = self.randomVal(self.ports)
         msg = self.randomVal(self.msgs)
-        self.file.write(f"{level} {self.ipaddr} {timestamp} {msg}\r\n")
+        log = f"{level} {self.ipaddr} {timestamp} {msg}\r\n"
+        print(log)
+        # self.file.write(log)
 
 if __name__ == "__main__":
     lg = LogGenerator()

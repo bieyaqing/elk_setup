@@ -57,3 +57,6 @@ output.logstash:
   enabled: true
   hosts: ["172.17.0.2:5044"]
 ```
+```
+filebeat setup --template -E output.logstash.enabled=false -E 'output.elasticsearch.hosts=["172.17.0.2:9200"]'
+```
