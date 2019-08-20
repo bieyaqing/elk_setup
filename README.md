@@ -22,3 +22,14 @@ elk:
 docker-compose up elk
 docker-compose up ubuntu
 ```
+
+## Logstash Config
+```conf
+filter {
+  if [type] == "log" {
+    grok {
+      match => { "message" => "\[%{WORD:level}\] \[%{IP:ipaddr}\] \[%{TIMESTAMP:timestamp}\] %{GREEDYDATA:message}" }
+    }
+  }
+}
+```
