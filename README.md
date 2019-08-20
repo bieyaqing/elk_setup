@@ -23,12 +23,15 @@ docker-compose up elk
 docker-compose up ubuntu
 ```
 
+## Kibana Config
+    1. Setting -> Kibana -> Index Patterns
+
 ## Logstash Config
 ```conf
 filter {
   if [type] == "log" {
     grok {
-      match => { "message" => "%{WORD:log_level} %{GREEDYDATA:message}" }
+      match => { "message" => "%{WORD:level} %{GREEDYDATA:message}" }
     }
   }
 }
@@ -42,12 +45,12 @@ filebeat modules enable system
 ```
 ```yml
 filebeat.inputs:
-- type: syslog
+- type: log
   enabled: true
   paths:
     - /home/logs/*.log
-setup.kibana:
-  host: "172.17.0.2:5601"
+#setup.kibana:
+  #host: "172.17.0.2:5601"
 filebeat.config.modules:
   path: ${path.config}/modules.d/*.yml
   reload.enabled: false
