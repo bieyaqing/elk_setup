@@ -17,7 +17,7 @@ elk:
     - "9200:9200"
     - "5044:5044"
 ```
-### Command
+### Commands
 ```
 docker-compose up elk
 docker-compose up ubuntu
@@ -28,7 +28,7 @@ docker-compose up ubuntu
 filter {
   if [type] == "log" {
     grok {
-      match => { "message" => "\[%{WORD:level}\] \[%{IP:ipaddr}\] \[%{TIMESTAMP:timestamp}\] %{GREEDYDATA:message}" }
+      match => { "message" => "\[%{WORD:level}\]\[%{IP:ipaddr}\]\[%{TIMESTAMP:timestamp}\] %{GREEDYDATA:message}" }
     }
   }
 }
