@@ -41,7 +41,10 @@ input {
 ```conf
 filter {
   grok {
-    match => { "message" => "%{WORD:level} %{GREEDYDATA:message}" }
+    match => { "message" => "%{LOGLEVEL:level} %{IP:ip_addr} %{TIMESTAMP_ISO8601:timestamp} %{GREEDYDATA:description}" }
+  }
+  date {
+    match => [ "timestamp", "YYYY-MM-DD'T'HH:mm:ss.SSS" ]
   }
 }
 ```
