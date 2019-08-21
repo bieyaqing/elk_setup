@@ -28,6 +28,16 @@ docker-compose up ubuntu
 
 ## Logstash Config
 ```conf
+input {
+  beats {
+    port => 5044
+    ssl => false
+    ssl_certificate => "/etc/pki/tls/certs/logstash-beats.crt"
+    ssl_key => "/etc/pki/tls/private/logstash-beats.key"
+  }
+}
+```
+```conf
 filter {
   if [type] == "log" {
     grok {
