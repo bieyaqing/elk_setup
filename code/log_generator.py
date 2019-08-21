@@ -36,7 +36,7 @@ class LogGenerator:
         level = self.randomVal(self.levels)
         port = self.randomVal(self.ports)
         msg = self.randomVal(self.msgs)
-        log = f"{level} {self.ipaddr} {timestamp} {msg}\r\n"
+        log = f"{level} {timestamp} {self.ipaddr} {port} {msg}\r\n"
         # print(log)
         f.write(log)
         f.close()
