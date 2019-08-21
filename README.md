@@ -64,9 +64,9 @@ output {
 https://github.com/elastic/logstash/blob/v1.4.2/patterns/grok-patterns
 
 ## Filebeat Config
-```
+<!-- ```
 filebeat modules enable system
-```
+``` -->
 ### /etc/filebeat/filebeat.yml
 ```yml
 filebeat.inputs:
