@@ -40,10 +40,8 @@ input {
 ```
 ```conf
 filter {
-  if [type] == "log" {
-    grok {
-      match => { "message" => "%{WORD:level} %{GREEDYDATA:message}" }
-    }
+  grok {
+    match => { "message" => "%{WORD:level} %{GREEDYDATA:message}" }
   }
 }
 ```
