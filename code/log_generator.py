@@ -14,6 +14,11 @@ class LogGenerator:
         self.file_name = f"/home/logs/{now_date_str}.log"
         self.levels = ["INFO", "DEBUG", "WARNING", "ERROR"]
         self.ports = [4500, 4501, 4502, 4503]
+        self.methods = ["GET", "POST", "PATCH", "PUT", "DELETE"]
+        self.paths = ["/api/hello", "/api/world"]
+        self.users = ["alice", "bob"]
+        self.code_paths = ["/home/code/pycode.py:get:12", "/home/code/pycode.py:delete:34"]
+        self.datas = ['{"a":"b","c":"d"}', '{"e":"f","g":"h"}', '{"i":"j","k":"l"}', '{"m":"n","o":"p"}']
         self.msgs = [
             "For a datetime instance d, str(d) is equivalent to d.isoformat(' ').",
             "All arguments are optional. tzinfo may be None, or an instance of a tzinfo subclass.",
@@ -32,11 +37,16 @@ class LogGenerator:
     def write(self):
         f = open(self.file_name, "a")
         now = datetime.now()
-        timestamp = now.strftime("%Y-%m-%dT%H:%M:%S.%f")
         level = self.randomVal(self.levels)
+        timestamp = now.strftime("%Y-%m-%dT%H:%M:%S.%f")
         port = self.randomVal(self.ports)
+        method = self.randomVal(self.methods)
+        path = self.randomVal(self.paths)
+        user = self.randomVal(self.users)
+        code_path = self.randomVal(self.code_paths)
+        data = self.randomVal(self.datas)
         msg = self.randomVal(self.msgs)
-        log = f"{level} {timestamp} {self.ipaddr} {port} {msg}\r\n"
+        log = f"{level} {timestamp} {self.ipaddr} {port} {method} {path} {user} {code_path} {data}\r\n"
         # print(log)
         f.write(log)
         f.close()
