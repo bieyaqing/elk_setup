@@ -47,6 +47,15 @@ filter {
   }
 }
 ```
+```conf
+output {
+  elasticsearch {
+    hosts => ["localhost:9200"]
+    manage_template => false
+    index => "%{[@metadata][beat]}-%{+YYYY.MM.dd}"
+  }
+}
+```
 ### Link
 https://github.com/elastic/logstash/blob/v1.4.2/patterns/grok-patterns
 
