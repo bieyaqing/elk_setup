@@ -27,6 +27,7 @@ docker-compose up ubuntu
     1. Setting -> Kibana -> Index Patterns
 
 ## Logstash Config
+### /etc/logstash/*
 ```conf
 input {
   beats {
@@ -53,6 +54,7 @@ https://github.com/elastic/logstash/blob/v1.4.2/patterns/grok-patterns
 ```
 filebeat modules enable system
 ```
+### /etc/filebeat/filebeat.yml
 ```yml
 filebeat.inputs:
 - type: log
