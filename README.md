@@ -25,6 +25,9 @@ docker-compose up ubuntu
 
 ## Kibana Config
     1. Setting -> Kibana -> Index Patterns
+    2. Create index pattern
+    3. filebeat* -> @timestamp -> Create
+
 
 ## Logstash Config
 ### /etc/logstash/*
