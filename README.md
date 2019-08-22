@@ -23,7 +23,7 @@ docker-compose up elk
 docker-compose up ubuntu
 ```
 ```
-docker run -p 5601:5601 -p 9200:9200 -p 5044:5044 -it --name elk sebp/elk
+docker run -p 5601:5601 -p 9200:9200 -p 5044:5044 -it --ulimit as=65536 --name elk sebp/elk
 ```
 
 ## Kibana Config
