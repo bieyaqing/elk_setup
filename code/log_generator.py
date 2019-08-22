@@ -16,6 +16,7 @@ class LogGenerator:
         self.ports = [4500, 4501, 4502, 4503]
         self.methods = ["GET", "POST", "PATCH", "PUT", "DELETE"]
         self.paths = ["/api/hello", "/api/world"]
+        self.client_ips = ["0.0.0.1", "0.0.0.2", "0.0.0.3"]
         self.users = ["alice", "bob"]
         self.code_paths = ["/home/code/pycode.py:get:12", "/home/code/pycode.py:delete:34"]
         self.datas = ['{"a":"b","c":"d"}', '{"e":"f","g":"h"}', '{"i":"j","k":"l"}', '{"m":"n","o":"p"}']
@@ -42,11 +43,12 @@ class LogGenerator:
         port = self.randomVal(self.ports)
         method = self.randomVal(self.methods)
         path = self.randomVal(self.paths)
+        client_ip = self.randomVal(self.client_ips)
         user = self.randomVal(self.users)
         code_path = self.randomVal(self.code_paths)
         data = self.randomVal(self.datas)
         msg = self.randomVal(self.msgs)
-        log = f"{level} {timestamp} {self.ipaddr} {port} {method} {path} {user} {code_path} {data}\r\n"
+        log = f"{level} {timestamp} {self.ipaddr} {port} {method} {path} {client_ip} {user} {code_path} {data}\r\n"
         # print(log)
         f.write(log)
         f.close()
