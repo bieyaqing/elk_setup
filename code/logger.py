@@ -35,71 +35,39 @@ class Logger(object):
         self.client_ip = client_ip
         self.username = username
 
-    def info(self, msg, *args, port=None, client_ip=None, username=None):
-        _filename, _line, _function, _stack = self.logger.findCaller(stack_info=True)
-        _filename = "/" + _filename
-        self.logger.info(msg, *args, extra={
+    def _prepare_extra(self, filename, line, function, port, client_ip, username):
+        if filename[0] != "/":
+            filename = "/" + filename
+        return {
             "_level": "INFO",
-            "_filename": _filename,
-            "_line": _line,
-            "_function": _function,
+            "_filename": filename,
+            "_line": line,
+            "_function": function,
             "_server_ip": self.server_ip,
             "_port": self.port if port is None else port,
-            "_method": _function,
-            "_path": _filename,
+            "_method": function,
+            "_path": filename,
             "_client_ip": self.client_ip if client_ip is None else client_ip,
             "_username": self.username if username is None else username
-        })
+        }
+
+    def info(self, msg, *args, port=None, client_ip=None, username=None):
+        _filename, _line, _function, _stack = self.logger.findCaller(stack_info=True)
+        self.logger.info(msg, *args, extra=self._prepare_extra(_filename, _line, _function, port, client_ip, username))
         
     def warning(self, msg, *args, port=None, client_ip=None, username=None):
         _filename, _line, _function, _stack = self.logger.findCaller(stack_info=True)
-        _filename = "/" + _filename
-        self.logger.warning(msg, *args, extra={
-            "_level": "WARNING",
-            "_filename": _filename,
-            "_line": _line,
-            "_function": _function,
-            "_server_ip": self.server_ip,
-            "_port": self.port if port is None else port,
-            "_method": _function,
-            "_path": _filename,
-            "_client_ip": self.client_ip if client_ip is None else client_ip,
-            "_username": self.username if username is None else username
-        })
+        self.logger.warning(msg, *args, extra=self._prepare_extra(_filename, _line, _function, port, client_ip, username))
 
     def error(self, msg, *args, port=None, client_ip=None, username=None):
         _filename, _line, _function, _stack = self.logger.findCaller(stack_info=True)
-        _filename = "/" + _filename
-        self.logger.error(msg, *args, extra={
-            "_level": "ERROR",
-            "_filename": _filename,
-            "_line": _line,
-            "_function": _function,
-            "_server_ip": self.server_ip,
-            "_port": self.port if port is None else port,
-            "_method": _function,
-            "_path": _filename,
-            "_client_ip": self.client_ip if client_ip is None else client_ip,
-            "_username": self.username if username is None else username
-        })
+        self.logger.error(msg, *args, extra=self._prepare_extra(_filename, _line, _function, port, client_ip, username))
 
     def debug(self, msg, *args, port=None, client_ip=None, username=None):
         logger = logging.getLogger(name="debug")
         logger.setLevel(Logger.LEVEL)
         _filename, _line, _function, _stack = self.logger.findCaller(stack_info=True)
-        _filename = "/" + _filename
-        self.logger.debug(msg, *args, extra={
-            "_level": "DEBUG",
-            "_filename": _filename,
-            "_line": _line,
-            "_function": _function,
-            "_server_ip": self.server_ip,
-            "_port": self.port if port is None else port,
-            "_method": _function,
-            "_path": _filename,
-            "_client_ip": self.client_ip if client_ip is None else client_ip,
-            "_username": self.username if username is None else username
-        })
+        self.logger.debug(msg, *args, extra=self._prepare_extra(_filename, _line, _function, port, client_ip, username))
 
 class SharedLogger(object):
 
