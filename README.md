@@ -57,7 +57,7 @@ filter {
 ```conf
 filter {
   grok {
-    match => { "message" => "%{LOGLEVEL:level} %{TIMESTAMP_ISO8601:timestamp} %{IP:server_ip} %{PROG:port} %{WORD:method} %{URIPATHPARAM:path} %{IP:client_ip} %{USERNAME:username} %{PATH:code_path} %{GREEDYDATA:data}" }
+    match => { "message" => "%{LOGLEVEL:level} %{TIMESTAMP_ISO8601:timestamp} %{IP:server_ip} %{PROG:port} %{PATH:code_path} %{GREEDYDATA:data}" }
   }
   date {
     match => [ "timestamp", "YYYY-MM-DD'T'HH:mm:ss.SSS" ]

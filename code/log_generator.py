@@ -36,17 +36,17 @@ class LogGenerator:
     def randomVal(self, _list):
         return _list[randrange(len(_list))]
 
-    def log_info(self, port, client_ip, username, msg):
-        Logger.info(msg, port=port, client_ip=client_ip, username=username)
+    def log_info(self, port, msg):
+        Logger.info(msg, port=port)
 
-    def log_debug(self, port, client_ip, username, msg):
-        Logger.debug(msg, port=port, client_ip=client_ip, username=username)
+    def log_debug(self, port, msg):
+        Logger.debug(msg, port=port)
 
-    def log_error(self, port, client_ip, username, msg):
-        Logger.error(msg, port=port, client_ip=client_ip, username=username)
+    def log_error(self, port, msg):
+        Logger.error(msg, port=port)
 
-    def log_warning(self, port, client_ip, username, msg):
-        Logger.warning(msg, port=port, client_ip=client_ip, username=username)
+    def log_warning(self, port, msg):
+        Logger.warning(msg, port=port)
 
     def write(self):
         # f = open(self.file_name, "a")
@@ -56,8 +56,8 @@ class LogGenerator:
         port = self.randomVal(self.ports)
         # method = self.randomVal(self.methods)
         # path = self.randomVal(self.paths)
-        client_ip = self.randomVal(self.client_ips)
-        username = self.randomVal(self.users)
+        # client_ip = self.randomVal(self.client_ips)
+        # username = self.randomVal(self.users)
         # code_path = self.randomVal(self.code_paths)
         # data = self.randomVal(self.datas)
         msg = self.randomVal(self.msgs)
@@ -66,13 +66,13 @@ class LogGenerator:
         # f.write(log)
         # f.close()
         if level == "INFO":
-            self.log_info(port, client_ip, username, msg)
+            self.log_info(port, msg)
         elif level == "DEBUG":
-            self.log_debug(port, client_ip, username, msg)
+            self.log_debug(port, msg)
         elif level == "WARNING":
-            self.log_warning(port, client_ip, username, msg)
+            self.log_warning(port, msg)
         elif level == "ERROR":
-            self.log_error(port, client_ip, username, msg)
+            self.log_error(port, msg)
 
 if __name__ == "__main__":
     lg = LogGenerator()
