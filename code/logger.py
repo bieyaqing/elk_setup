@@ -10,7 +10,7 @@ class Logger(object):
     NOW = datetime.now()
     NOW_DATE_STR = NOW.strftime("%Y-%m-%d")
     LOG_FILE_PATH = f"/home/logs/{NOW_DATE_STR}.log"
-    FORMAT = "%(_level)s %(datetime)-15s %(_server_ip)s %(_port)s %(_method)s %(_path)s %(_client_ip)s %(_username)s %(_filename)s:%(_function)s:%(_line)d %(message)s"
+    FORMAT = "%(_level)s %(asctime)-15s %(_server_ip)s %(_port)s %(_method)s %(_path)s %(_client_ip)s %(_username)s %(_filename)s:%(_function)s:%(_line)d %(message)s"
     logging.basicConfig(filename=LOG_FILE_PATH, filemode="a", format=FORMAT)
     LEVEL = logging.INFO
 
