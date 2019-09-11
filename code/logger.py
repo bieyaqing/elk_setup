@@ -23,13 +23,19 @@ class Logger(object):
     CONF_NAME = config["Logging"].get("LOGGINGFILE", "INFO")
     LOG_FILE_PATH = f"{home}/logs/{NOW_DATE_STR}-{CONF_NAME}"
     FORMAT = "%(_level)s %(asctime)-15s %(_server_ip)s %(_port)s %(_filename)s:%(_function)s:%(_line)d %(message)s"
-    logging.basicConfig(filename=LOG_FILE_PATH, filemode="a", format=FORMAT)
+    # logging.basicConfig(filename=LOG_FILE_PATH, filemode="a", format=FORMAT)
     CONF_LEVEL = config["Logging"].get("LOGGINGLEVEL", "INFO")
     LEVEL = logging._nameToLevel[CONF_LEVEL]
 
     def __init__(self, logger_name=__name__, port="0000"):
         self.logger = logging.getLogger(name=logger_name)
         self.logger.setLevel(Logger.LEVEL)
+        if self.logger.hasHandlers():
+            for hdl in self.logger.handlers:
+                self.logger.removeHandler(hdl)
+        handler = logging.handlers.RotatingFileHandler(LOG_FILE_PATH, maxBytes=50 * 1024 * 1024, backupCount=100, encoding="UTF-8")
+        handler.setFormatter(logging.Formatter(FORMAT))
+        self.logger.addHandler(handler)
         self.server_ip = gethostbyname(gethostname())
         self.port = port
         self.log_stream_queue = Queue()
