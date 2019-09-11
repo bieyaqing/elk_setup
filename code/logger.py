@@ -3,6 +3,7 @@ import logging, json
 
 from configparser import ConfigParser
 from datetime import datetime
+from logging.handlers import RotatingFileHandler
 from os.path import expanduser
 from queue import Queue
 from socket import gethostbyname
@@ -33,7 +34,7 @@ class Logger(object):
         if self.logger.hasHandlers():
             for hdl in self.logger.handlers:
                 self.logger.removeHandler(hdl)
-        handler = logging.handlers.RotatingFileHandler(LOG_FILE_PATH, maxBytes=50 * 1024 * 1024, backupCount=100, encoding="UTF-8")
+        handler = RotatingFileHandler(LOG_FILE_PATH, maxBytes=50 * 1024 * 1024, backupCount=100, encoding="UTF-8")
         handler.setFormatter(logging.Formatter(FORMAT))
         self.logger.addHandler(handler)
         self.server_ip = gethostbyname(gethostname())
