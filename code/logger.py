@@ -1,6 +1,8 @@
 
 import logging
 
+from datetime import datetime
+
 class Logger(object):
 
     NOW = datetime.now()
@@ -99,5 +101,5 @@ class SharedLogger(object):
     @staticmethod
     def debug(msg, *args, port=None, client_ip=None, username=None):
         SharedLogger.logger.debug(msg, *args, port, client_ip, username)
-        
+
         
