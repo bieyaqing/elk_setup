@@ -70,7 +70,7 @@ class SharedLogger(object):
     log_stream_queue = Queue()
     log_stop_event = Event()
 
-    def logging_thread_method(self, log_stream_queue, stop_event):
+    def logging_thread_method(log_stream_queue, stop_event):
         while not stop_event.is_set():
             if not log_stream_queue.empty():
                 raw_str = log_stream_queue.get()
