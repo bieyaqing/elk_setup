@@ -75,7 +75,7 @@ class Logger(object):
         return json.dumps({
             "level": level,
             "msg": msg,
-            "args": *args,
+            "args": args,
             "extra": extra
         })
 
