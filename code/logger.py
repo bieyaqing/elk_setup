@@ -80,19 +80,19 @@ class SharedLogger(object):
                 args = raw_obj.get("args")
                 port = raw_obj.get("port")
                 if level == 'info':
-                    SharedLogger.logger.info(msg, *args, port=port)
+                    logger.info(msg, *args, port=port)
                 elif level == 'warning':
-                    SharedLogger.warning.info(msg, *args, port=port)
+                    logger.warning(msg, *args, port=port)
                 elif level == 'error':
-                    SharedLogger.error.info(msg, *args, port=port)
+                    logger.error(msg, *args, port=port)
                 elif level == 'debug':
-                    SharedLogger.debug.info(msg, *args, port=port)
+                    logger.debug(msg, *args, port=port)
                 elif level == 'critical':
-                    SharedLogger.critical.info(msg, *args, port=port)
+                    logger.critical(msg, *args, port=port)
             else:
                 sleep(0.01)
 
-    t = Thread(target=logging_thread_method, args=(SharedLogger.log_stream_queue, SharedLogger.log_stop_event,))
+    t = Thread(target=logging_thread_method, args=(log_stream_queue, log_stop_event,))
     t.start()
 
     @staticmethod
