@@ -37,6 +37,7 @@ class Logger(object):
 
     def info(self, msg, *args, port=None, client_ip=None, username=None):
         _filename, _line, _function, _stack = self.logger.findCaller(stack_info=True)
+        _filename = "/" + _filename
         self.logger.info(msg, *args, extra={
             "_level": "INFO",
             "_filename": _filename,
@@ -52,6 +53,7 @@ class Logger(object):
         
     def warning(self, msg, *args, port=None, client_ip=None, username=None):
         _filename, _line, _function, _stack = self.logger.findCaller(stack_info=True)
+        _filename = "/" + _filename
         self.logger.warning(msg, *args, extra={
             "_level": "WARNING",
             "_filename": _filename,
@@ -67,6 +69,7 @@ class Logger(object):
 
     def error(self, msg, *args, port=None, client_ip=None, username=None):
         _filename, _line, _function, _stack = self.logger.findCaller(stack_info=True)
+        _filename = "/" + _filename
         self.logger.error(msg, *args, extra={
             "_level": "ERROR",
             "_filename": _filename,
@@ -84,6 +87,7 @@ class Logger(object):
         logger = logging.getLogger(name="debug")
         logger.setLevel(Logger.LEVEL)
         _filename, _line, _function, _stack = self.logger.findCaller(stack_info=True)
+        _filename = "/" + _filename
         self.logger.debug(msg, *args, extra={
             "_level": "DEBUG",
             "_filename": _filename,
