@@ -1,11 +1,13 @@
 
-import logging
+import logging, json
 
 from configparser import ConfigParser
 from datetime import datetime
 from os.path import expanduser
+from queue import Queue
 from socket import gethostbyname
 from socket import gethostname
+from threading import Event
 
 config = ConfigParser()
 home = expanduser("~")
@@ -64,21 +66,74 @@ class Logger(object):
 class SharedLogger(object):
 
     logger = Logger("SHARED")
+    log_stream_queue = Queue()
+    log_stop_event = Event()
+
+    def logging_thread_method(self, log_stream_queue, stop_event):
+        while not stop_event.is_set():
+            if not log_stream_queue.empty():
+                raw_str = log_stream_queue.get()
+                raw_obj = json.loads(raw_str)
+                level = raw_obj.get("level")
+                msg = raw_obj.get("msg")
+                args = raw_obj.get("args")
+                port = raw_obj.get("port")
+                if level == 'info':
+                    SharedLogger.logger.info(msg, *args, port=port)
+                elif level == 'warning':
+                    SharedLogger.warning.info(msg, *args, port=port)
+                elif level == 'error':
+                    SharedLogger.error.info(msg, *args, port=port)
+                elif level == 'debug':
+                    SharedLogger.debug.info(msg, *args, port=port)
+                elif level == 'critical':
+                    SharedLogger.critical.info(msg, *args, port=port)
+            else:
+                sleep(0.01)
 
     @staticmethod
     def info(msg, *args, port=None):
-        SharedLogger.logger.info(msg, *args, port=port)
+        SharedLogger.log_stream_queue.put(json.dumps({
+            "level": "info",
+            "msg": msg,
+            "args": args,
+            "port": port
+        }))
 
     @staticmethod
     def warning(msg, *args, port=None):
-        SharedLogger.logger.warning(msg, *args, port=port)
+        SharedLogger.log_stream_queue.put(json.dumps({
+            "level": "warning",
+            "msg": msg,
+            "args": args,
+            "port": port
+        }))
 
     @staticmethod
     def error(msg, *args, port=None):
-        SharedLogger.logger.error(msg, *args, port=port)
+        SharedLogger.log_stream_queue.put(json.dumps({
+            "level": "error",
+            "msg": msg,
+            "args": args,
+            "port": port
+        }))
 
     @staticmethod
     def debug(msg, *args, port=None):
-        SharedLogger.logger.debug(msg, *args, port=port)
+        SharedLogger.log_stream_queue.put(json.dumps({
+            "level": "debug",
+            "msg": msg,
+            "args": args,
+            "port": port
+        }))
+
+    @staticmethod
+    def critical(msg, *args, port=None):
+        SharedLogger.log_stream_queue.put(json.dumps({
+            "level": "critical",
+            "msg": msg,
+            "args": args,
+            "port": port
+        }))
 
         
