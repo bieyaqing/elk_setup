@@ -8,6 +8,7 @@ from queue import Queue
 from socket import gethostbyname
 from socket import gethostname
 from threading import Event
+from threading import Thread
 
 config = ConfigParser()
 home = expanduser("~")
@@ -90,6 +91,9 @@ class SharedLogger(object):
                     SharedLogger.critical.info(msg, *args, port=port)
             else:
                 sleep(0.01)
+
+    t = Thread(target=logging_thread_method, args=(SharedLogger.log_stream_queue, SharedLogger.log_stop_event,))
+    t.start()
 
     @staticmethod
     def info(msg, *args, port=None):
