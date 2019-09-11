@@ -78,5 +78,5 @@ if __name__ == "__main__":
     lg = LogGenerator()
     while True:
         lg.write()
-        sleep(1)
+        sleep(0.1)
 
