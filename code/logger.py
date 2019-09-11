@@ -79,23 +79,23 @@ class Logger(object):
 
     def info(self, msg, *args, port=None):
         _filename, _line, _function, _stack = self.logger.findCaller(stack_info=True)
-        self.log_stream_queue.put(self._prepare_queue_obj("info", msg, *args, self._prepare_extra(_filename, _line, _function, port)))
+        self.log_stream_queue.put(self._prepare_queue_obj("info", msg, *args, extra=self._prepare_extra(_filename, _line, _function, port)))
         
     def warning(self, msg, *args, port=None):
         _filename, _line, _function, _stack = self.logger.findCaller(stack_info=True)
-        self.log_stream_queue.put(self._prepare_queue_obj("warning", msg, *args, self._prepare_extra(_filename, _line, _function, port)))
+        self.log_stream_queue.put(self._prepare_queue_obj("warning", msg, *args, extra=self._prepare_extra(_filename, _line, _function, port)))
 
     def error(self, msg, *args, port=None):
         _filename, _line, _function, _stack = self.logger.findCaller(stack_info=True)
-        self.log_stream_queue.put(self._prepare_queue_obj("error", msg, *args, self._prepare_extra(_filename, _line, _function, port)))
+        self.log_stream_queue.put(self._prepare_queue_obj("error", msg, *args, extra=self._prepare_extra(_filename, _line, _function, port)))
 
     def debug(self, msg, *args, port=None):
         _filename, _line, _function, _stack = self.logger.findCaller(stack_info=True)
-        self.log_stream_queue.put(self._prepare_queue_obj("debug", msg, *args, self._prepare_extra(_filename, _line, _function, port)))
+        self.log_stream_queue.put(self._prepare_queue_obj("debug", msg, *args, extra=self._prepare_extra(_filename, _line, _function, port)))
 
     def critical(self, msg, *args, port=None):
         _filename, _line, _function, _stack = self.logger.findCaller(stack_info=True)
-        self.log_stream_queue.put(self._prepare_queue_obj("critical", msg, *args, self._prepare_extra(_filename, _line, _function, port)))
+        self.log_stream_queue.put(self._prepare_queue_obj("critical", msg, *args, extra=self._prepare_extra(_filename, _line, _function, port)))
 
 class SharedLogger(object):
 
