@@ -23,7 +23,7 @@ class Logger(object):
     NOW_DATE_STR = NOW.strftime("%Y-%m-%d")
     CONF_NAME = config["Logging"].get("LOGGINGFILE", "INFO")
     LOG_FILE_PATH = f"{home}/logs/{NOW_DATE_STR}-{CONF_NAME}"
-    FORMAT = "%(_level)s %(asctime)-15s %(_server_ip)s %(_port)s %(_filename)s:%(_function)s:%(_line)d %(message)s"
+    FORMAT = "%(levelname)s %(asctime)-15s %(_server_ip)s %(_port)s %(_filename)s:%(_function)s:%(_line)d %(message)s"
     # logging.basicConfig(filename=LOG_FILE_PATH, filemode="a", format=FORMAT)
     CONF_LEVEL = config["Logging"].get("LOGGINGLEVEL", "INFO")
     LEVEL = logging._nameToLevel[CONF_LEVEL]
@@ -70,7 +70,6 @@ class Logger(object):
         if filename[0] != "/":
             filename = "/" + filename
         return {
-            "_level": "INFO",
             "_filename": filename,
             "_line": line,
             "_function": function,
