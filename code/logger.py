@@ -35,6 +35,7 @@ class Logger(object):
         self.log_stream_queue = Queue()
         self.log_stop_event = Event()
         t = Thread(target=self.logging_thread_method, args=(self.log_stream_queue, self.log_stop_event,))
+        t.start()
 
     def logging_thread_method(self, log_stream_queue, stop_event):
         while not stop_event.is_set():
