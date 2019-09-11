@@ -103,22 +103,22 @@ class SharedLogger(object):
 
     @staticmethod
     def info(msg, *args, port=None):
-        SharedLogger.logger.info(msg, *args, port)
+        SharedLogger.logger.info(msg, *args, port=port)
 
     @staticmethod
     def warning(msg, *args, port=None):
-        SharedLogger.logger.warning(msg, *args, port)
+        SharedLogger.logger.warning(msg, *args, port=port)
 
     @staticmethod
     def error(msg, *args, port=None):
-        SharedLogger.logger.error(msg, *args, port)
+        SharedLogger.logger.error(msg, *args, port=port)
 
     @staticmethod
     def debug(msg, *args, port=None):
-        SharedLogger.logger.debug(msg, *args, port)
+        SharedLogger.logger.debug(msg, *args, port=port)
 
     @staticmethod
     def critical(msg, *args, port=None):
-        SharedLogger.logger.critical(msg, *args, port)
+        SharedLogger.logger.critical(msg, *args, port=port)
 
         
