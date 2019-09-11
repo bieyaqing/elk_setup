@@ -2,6 +2,8 @@
 import logging
 
 from datetime import datetime
+from socket import gethostbyname
+from socket import gethostname
 
 class Logger(object):
 
