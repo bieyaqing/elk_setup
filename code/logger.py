@@ -90,18 +90,18 @@ class SharedLogger(object):
 
     @staticmethod
     def info(msg, *args, port=None, client_ip=None, username=None):
-        SharedLogger.logger.info(msg, *args, port, client_ip, username)
+        SharedLogger.logger.info(msg, *args, port=port, client_ip=client_ip, username=username)
 
     @staticmethod
     def warning(msg, *args, port=None, client_ip=None, username=None):
-        SharedLogger.logger.warning(msg, *args, port, client_ip, username)
+        SharedLogger.logger.warning(msg, *args, port=port, client_ip=client_ip, username=username)
 
     @staticmethod
     def error(msg, *args, port=None, client_ip=None, username=None):
-        SharedLogger.logger.error(msg, *args, port, client_ip, username)
+        SharedLogger.logger.error(msg, *args, port=port, client_ip=client_ip, username=username)
 
     @staticmethod
     def debug(msg, *args, port=None, client_ip=None, username=None):
-        SharedLogger.logger.debug(msg, *args, port, client_ip, username)
+        SharedLogger.logger.debug(msg, *args, port=port, client_ip=client_ip, username=username)
 
         
