@@ -34,8 +34,8 @@ class Logger(object):
         if self.logger.hasHandlers():
             for hdl in self.logger.handlers:
                 self.logger.removeHandler(hdl)
-        handler = RotatingFileHandler(logger.LOG_FILE_PATH, maxBytes=50 * 1024 * 1024, backupCount=100, encoding="UTF-8")
-        handler.setFormatter(logging.Formatter(FORMAT))
+        handler = RotatingFileHandler(Logger.LOG_FILE_PATH, maxBytes=50 * 1024 * 1024, backupCount=100, encoding="UTF-8")
+        handler.setFormatter(logging.Formatter(Logger.FORMAT))
         self.logger.addHandler(handler)
         self.server_ip = gethostbyname(gethostname())
         self.port = port
