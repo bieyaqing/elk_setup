@@ -44,18 +44,17 @@ class Logger(object):
                 raw_obj = json.loads(raw_str)
                 level = raw_obj.get("level")
                 msg = raw_obj.get("msg")
-                args = raw_obj.get("args")
                 extra = raw_obj.get("extra")
                 if level == "info":
-                    self.logger.info(msg, *args, extra=extra)
+                    self.logger.info(msg, extra=extra)
                 elif level == "warning":
-                    self.logger.warning(msg, *args, extra=extra)
+                    self.logger.warning(msg, extra=extra)
                 elif level == "error":
-                    self.logger.error(msg, *args, extra=extra)
+                    self.logger.error(msg, extra=extra)
                 elif level == "debug":
-                    self.logger.debug(msg, *args, extra=extra)
+                    self.logger.debug(msg, extra=extra)
                 elif level == "critical":
-                    self.logger.critical(msg, *args, extra=extra)
+                    self.logger.critical(msg, extra=extra)
             else:
                 sleep(0.01)
 
@@ -71,33 +70,32 @@ class Logger(object):
             "_port": self.port if port is None else port
         }
 
-    def _prepare_queue_obj(self, level, msg, *args, extra):
+    def _prepare_queue_obj(self, level, msg, extra):
         return json.dumps({
             "level": level,
             "msg": msg,
-            "args": args,
             "extra": extra
         })
 
     def info(self, msg, *args, port=None):
         _filename, _line, _function, _stack = self.logger.findCaller(stack_info=True)
-        self.log_stream_queue.put(self._prepare_queue_obj("info", msg, *args, extra=self._prepare_extra(_filename, _line, _function, port)))
+        self.log_stream_queue.put(self._prepare_queue_obj("info", msg, extra=self._prepare_extra(_filename, _line, _function, port)))
         
     def warning(self, msg, *args, port=None):
         _filename, _line, _function, _stack = self.logger.findCaller(stack_info=True)
-        self.log_stream_queue.put(self._prepare_queue_obj("warning", msg, *args, extra=self._prepare_extra(_filename, _line, _function, port)))
+        self.log_stream_queue.put(self._prepare_queue_obj("warning", msg, extra=self._prepare_extra(_filename, _line, _function, port)))
 
     def error(self, msg, *args, port=None):
         _filename, _line, _function, _stack = self.logger.findCaller(stack_info=True)
-        self.log_stream_queue.put(self._prepare_queue_obj("error", msg, *args, extra=self._prepare_extra(_filename, _line, _function, port)))
+        self.log_stream_queue.put(self._prepare_queue_obj("error", msg, extra=self._prepare_extra(_filename, _line, _function, port)))
 
     def debug(self, msg, *args, port=None):
         _filename, _line, _function, _stack = self.logger.findCaller(stack_info=True)
-        self.log_stream_queue.put(self._prepare_queue_obj("debug", msg, *args, extra=self._prepare_extra(_filename, _line, _function, port)))
+        self.log_stream_queue.put(self._prepare_queue_obj("debug", msg, extra=self._prepare_extra(_filename, _line, _function, port)))
 
     def critical(self, msg, *args, port=None):
         _filename, _line, _function, _stack = self.logger.findCaller(stack_info=True)
-        self.log_stream_queue.put(self._prepare_queue_obj("critical", msg, *args, extra=self._prepare_extra(_filename, _line, _function, port)))
+        self.log_stream_queue.put(self._prepare_queue_obj("critical", msg, extra=self._prepare_extra(_filename, _line, _function, port)))
 
 class SharedLogger(object):
 
