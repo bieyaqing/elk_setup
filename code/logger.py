@@ -9,6 +9,7 @@ from socket import gethostbyname
 from socket import gethostname
 from threading import Event
 from threading import Thread
+from time import sleep
 
 config = ConfigParser()
 home = expanduser("~")
