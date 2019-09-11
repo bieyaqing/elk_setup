@@ -1,9 +1,16 @@
 
 import logging
 
+from configparser import ConfigParser
 from datetime import datetime
+from os.path import expanduser
 from socket import gethostbyname
 from socket import gethostname
+
+config = ConfigParser()
+home = expanduser("~")
+
+config.read(f"{home}/.elk_setup/config.ini")
 
 class Logger(object):
 
@@ -12,7 +19,13 @@ class Logger(object):
     LOG_FILE_PATH = f"/home/logs/{NOW_DATE_STR}.log"
     FORMAT = "%(_level)s %(asctime)-15s %(_server_ip)s %(_port)s %(_method)s %(_path)s %(_client_ip)s %(_username)s %(_filename)s:%(_function)s:%(_line)d %(message)s"
     logging.basicConfig(filename=LOG_FILE_PATH, filemode="a", format=FORMAT)
-    LEVEL = logging.INFO
+    CONF_LEVEL = config["Logging"].get("LOGGINGLEVEL", "INFO")
+    if CONF_LEVEL == "INFO":
+        LEVEL = logging.INFO
+    elif CONF_LEVEL == "DEBUG":
+        LEVEL = logging.DEBUG
+    else:
+        LEVEL = logging.INFO
 
     def __init__(self, logger_name=__name__, port="0000", client_ip="0.0.0.0", username="incognito"):
         self.logger = logging.getLogger(name=logger_name)
