@@ -16,7 +16,8 @@ class Logger(object):
 
     NOW = datetime.now()
     NOW_DATE_STR = NOW.strftime("%Y-%m-%d")
-    LOG_FILE_PATH = f"{home}/logs/{NOW_DATE_STR}.log"
+    CONF_NAME = config["Logging"].get("LOGGINGFILE", "INFO")
+    LOG_FILE_PATH = f"{home}/logs/{NOW_DATE_STR}-{CONF_NAME}"
     FORMAT = "%(_level)s %(asctime)-15s %(_server_ip)s %(_port)s %(_filename)s:%(_function)s:%(_line)d %(message)s"
     logging.basicConfig(filename=LOG_FILE_PATH, filemode="a", format=FORMAT)
     CONF_LEVEL = config["Logging"].get("LOGGINGLEVEL", "INFO")
@@ -65,19 +66,19 @@ class SharedLogger(object):
     logger = Logger("SHARED")
 
     @staticmethod
-    def info(msg, *args, port=None, client_ip=None, username=None):
-        SharedLogger.logger.info(msg, *args, port=port, client_ip=client_ip, username=username)
+    def info(msg, *args, port=None):
+        SharedLogger.logger.info(msg, *args, port=port)
 
     @staticmethod
-    def warning(msg, *args, port=None, client_ip=None, username=None):
-        SharedLogger.logger.warning(msg, *args, port=port, client_ip=client_ip, username=username)
+    def warning(msg, *args, port=None):
+        SharedLogger.logger.warning(msg, *args, port=port)
 
     @staticmethod
-    def error(msg, *args, port=None, client_ip=None, username=None):
-        SharedLogger.logger.error(msg, *args, port=port, client_ip=client_ip, username=username)
+    def error(msg, *args, port=None):
+        SharedLogger.logger.error(msg, *args, port=port)
 
     @staticmethod
-    def debug(msg, *args, port=None, client_ip=None, username=None):
-        SharedLogger.logger.debug(msg, *args, port=port, client_ip=client_ip, username=username)
+    def debug(msg, *args, port=None):
+        SharedLogger.logger.debug(msg, *args, port=port)
 
         
