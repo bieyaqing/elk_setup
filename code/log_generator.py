@@ -1,6 +1,6 @@
 
 from datetime import datetime
-from logger import SharedLogger as Logger
+from logger import Logger as logger
 from random import randrange
 from socket import gethostbyname
 from socket import gethostname
@@ -9,6 +9,7 @@ from time import sleep
 class LogGenerator:
 
     def __init__(self):
+        self.logger = logger()
         # now = datetime.now()
         # now_date_str = now.strftime("%Y-%m-%d")
         # self.ipaddr = gethostbyname(gethostname())
@@ -37,16 +38,16 @@ class LogGenerator:
         return _list[randrange(len(_list))]
 
     def log_info(self, port, msg):
-        Logger.info(msg, port=port)
+        self.logger.info(msg, port=port)
 
     def log_debug(self, port, msg):
-        Logger.debug(msg, port=port)
+        self.logger.debug(msg, port=port)
 
     def log_error(self, port, msg):
-        Logger.error(msg, port=port)
+        self.logger.error(msg, port=port)
 
     def log_warning(self, port, msg):
-        Logger.warning(msg, port=port)
+        self.logger.warning(msg, port=port)
 
     def write(self):
         # f = open(self.file_name, "a")
