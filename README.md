@@ -60,7 +60,7 @@ filter {
     match => { "message" => "%{LOGLEVEL:web_level} %{TIMESTAMP_ISO8601:web_timestamp} %{IP:web_server_ip} %{PROG:web_port} %{PATH:web_code_path} %{WORD:web_method} %{IP:web_client_ip} %{USER:web_username} %{GREEDYDATA:web_data}" }
   }
   date {
-    match => [ "timestamp", "yyyy-MM-dd'T'kk:mm:ss.SSS", "yyyy-MM-dd kk:mm:ss,SSS" ]
+    match => [ "web_timestamp", "yyyy-MM-dd'T'kk:mm:ss.SSS", "yyyy-MM-dd kk:mm:ss,SSS" ]
   }
 }
 ```
