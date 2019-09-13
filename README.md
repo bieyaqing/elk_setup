@@ -68,7 +68,7 @@ filter {
 filter {
   grok {
     match => { "message" => [
-      "%{LOGLEVEL:level} %{TIMESTAMP_ISO8601:web_timestamp} %{IP:web_server_ip} %{PROG:web_port} %{PATH:web_code_path} %{WORD:web_method} %{IP:web_client_ip} %{USER:web_username} %{GREEDYDATA:web_data}",
+      "%{LOGLEVEL:level} %{TIMESTAMP_ISO8601:timestamp} %{IP:server_ip} %{PROG:port} %{PATH:code_path} %{WORD:method} %{IP:client_ip} %{USER:username} %{GREEDYDATA:data}",
       "%{LOGLEVEL:level} %{TIMESTAMP_ISO8601:timestamp} %{IP:server_ip} %{PROG:port} %{PATH:code_path} %{GREEDYDATA:data}"
     ] }
   }
