@@ -32,7 +32,7 @@ class Logger(object):
 
     def __init__(self, logger_name=__name__, log_path=LOG_PATH, port="0000"):
         self.logger = logging.getLogger(name=logger_name)
-        self.logger.setLevel(LOG_LEVEL)
+        self.logger.setLevel(Logger.LOG_LEVEL)
         if self.logger.hasHandlers():
             for hdl in self.logger.handlers:
                 self.logger.removeHandler(hdl)
