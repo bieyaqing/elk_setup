@@ -20,7 +20,6 @@ class LogGenerator:
         # self.paths = ["/api/hello", "/api/world"]
         self.client_ips = ["0.0.0.1", "0.0.0.2", "0.0.0.3"]
         self.users = ["alice", "bob", "chris", 'doggy']
-        # self.code_paths = ["/home/code/pycode.py:get:12", "/home/code/pycode.py:delete:34"]
         # self.datas = ['{"a":"b","c":"d"}', '{"e":"f","g":"h"}', '{"i":"j","k":"l"}', '{"m":"n","o":"p"}']
         self.msgs = [
             "For a datetime instance d, str(d) is equivalent to d.isoformat(' ').",
@@ -55,14 +54,15 @@ class LogGenerator:
         level = self.randomVal(self.levels)
         # timestamp = now.strftime("%Y-%m-%dT%H:%M:%S.%f")
         port = self.randomVal(self.ports)
-        # method = self.randomVal(self.methods)
+        method = self.randomVal(self.methods)
         # path = self.randomVal(self.paths)
-        # client_ip = self.randomVal(self.client_ips)
-        # username = self.randomVal(self.users)
+        client_ip = self.randomVal(self.client_ips)
+        username = self.randomVal(self.users)
         # code_path = self.randomVal(self.code_paths)
         # data = self.randomVal(self.datas)
         msg = self.randomVal(self.msgs)
-        # log = f"{level} {timestamp} {self.ipaddr} {port} {method} {path} {client_ip} {user} {code_path} {data}\r\n"
+        msg = f"{method} {client_ip} {username} {msg}"
+        # log = f"{level} {timestamp} {self.ipaddr} {port} {method} {path} {client_ip} {username} {code_path} {data}\r\n"
         # print(log)
         # f.write(log)
         # f.close()
