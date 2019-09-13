@@ -28,11 +28,11 @@ class Logger(object):
     LOGGINGLEVEL = config["Logging"].get("LOGGINGLEVEL", "INFO")
 
     LOG_PATH = f"{home}/logs/{NOW_DATE_STR}-{LOGGINGFILE}"
-    LEVEL = logging._nameToLevel[LOGGINGLEVEL]
+    LOG_LEVEL = logging._nameToLevel[LOGGINGLEVEL]
 
-    def __init__(self, logger_name=__name__, log_path=Logger.LOG_PATH, port="0000"):
+    def __init__(self, logger_name=__name__, log_path=LOG_PATH, port="0000"):
         self.logger = logging.getLogger(name=logger_name)
-        self.logger.setLevel(Logger.LEVEL)
+        self.logger.setLevel(LOG_LEVEL)
         if self.logger.hasHandlers():
             for hdl in self.logger.handlers:
                 self.logger.removeHandler(hdl)
