@@ -98,6 +98,7 @@ filebeat modules enable system
 filebeat.inputs:
 - type: log
   enabled: true
+  scan_frequency: 100ms
   paths:
     - /home/logs/*.log
 #setup.kibana:
