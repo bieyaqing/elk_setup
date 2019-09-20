@@ -119,3 +119,9 @@ output.logstash:
 ```
 filebeat setup --template -E output.logstash.enabled=false -E 'output.elasticsearch.hosts=["172.17.0.2:9200"]'
 ```
+
+## Run Test Code
+```sh
+pip install -r code/requirements.txt
+python code/log_generator.py -m web
+```
