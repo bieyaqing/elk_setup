@@ -34,7 +34,7 @@ docker run -p 5601:5601 -p 9200:9200 -p 5044:5044 -it --ulimit nofile=1024:65536
 
 ## Logstash Config
 ### /etc/logstash/*
-```conf
+```js
 input {
   beats {
     port => 5044
@@ -44,7 +44,7 @@ input {
   }
 }
 ```
-```json
+```js
 // default format
 filter {
   grok {
@@ -55,7 +55,7 @@ filter {
   }
 }
 ```
-```json
+```js
 // web foramt
 filter {
   grok {
@@ -66,7 +66,7 @@ filter {
   }
 }
 ```
-```json
+```js
 // multiple formats, but not working!!!
 filter {
   grok {
@@ -81,7 +81,7 @@ filter {
   }
 }
 ```
-```conf
+```js
 output {
   elasticsearch {
     hosts => ["localhost:9200"]
