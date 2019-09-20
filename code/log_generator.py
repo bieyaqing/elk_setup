@@ -1,4 +1,6 @@
 
+import argparse
+
 from datetime import datetime
 from logger import Logger as logger
 from random import randrange
@@ -8,7 +10,8 @@ from time import sleep
 
 class LogGenerator:
 
-    def __init__(self):
+    def __init__(self, mode="default"):
+        self.mode = mode
         self.logger = logger()
         # now = datetime.now()
         # now_date_str = now.strftime("%Y-%m-%d")
@@ -61,11 +64,10 @@ class LogGenerator:
         # code_path = self.randomVal(self.code_paths)
         # data = self.randomVal(self.datas)
         msg = self.randomVal(self.msgs)
-        msg = f"{method} {client_ip} {username} {msg}"
-        # log = f"{level} {timestamp} {self.ipaddr} {port} {method} {path} {client_ip} {username} {code_path} {data}\r\n"
-        # print(log)
-        # f.write(log)
-        # f.close()
+        if self.mode == "web":
+            msg = f"{method} {client_ip} {username} {msg}"
+        else:
+            msg = msg
         if level == "INFO":
             self.log_info(port, msg)
         elif level == "DEBUG":
@@ -76,7 +78,13 @@ class LogGenerator:
             self.log_error(port, msg)
 
 if __name__ == "__main__":
-    lg = LogGenerator()
+    parser = argparse.ArgumentParser()
+    parser.add_argument("-m", "--mode", type=str, help="log mode: default, web", default="default")
+    args = parser.parse_args()
+
+    mode = args.mode
+
+    lg = LogGenerator(mode=mode)
     while True:
         lg.write()
         sleep(1)
