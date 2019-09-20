@@ -120,6 +120,13 @@ output.logstash:
 filebeat setup --template -E output.logstash.enabled=false -E 'output.elasticsearch.hosts=["172.17.0.2:9200"]'
 ```
 
+## Kibana base url
+```yml
+# proxy use only
+server.basePath: "/xxx"
+server.rewriteBasePath: true
+```
+
 ## Run Test Code
 ```sh
 pip install -r code/requirements.txt
