@@ -44,7 +44,8 @@ input {
   }
 }
 ```
-```conf
+```json
+// default format
 filter {
   grok {
     match => { "message" => "%{LOGLEVEL:level} %{TIMESTAMP_ISO8601:timestamp} %{IP:server_ip} %{PROG:port} %{PATH:code_path} %{GREEDYDATA:data}" }
@@ -54,7 +55,8 @@ filter {
   }
 }
 ```
-```conf
+```json
+// web foramt
 filter {
   grok {
     match => { "message" => "%{LOGLEVEL:web_level} %{TIMESTAMP_ISO8601:web_timestamp} %{IP:web_server_ip} %{PROG:web_port} %{PATH:web_code_path} %{WORD:web_method} %{IP:web_client_ip} %{USER:web_username} %{GREEDYDATA:web_data}" }
@@ -64,7 +66,8 @@ filter {
   }
 }
 ```
-```conf
+```json
+// multiple formats, but not working!!!
 filter {
   grok {
     break_on_match => false
