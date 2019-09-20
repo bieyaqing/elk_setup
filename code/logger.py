@@ -2,7 +2,7 @@ import json
 import logging
 
 from configparser import ConfigParser
-from datetime import datetime
+# from datetime import datetime
 from logging.handlers import RotatingFileHandler
 from os.path import expanduser
 from queue import Queue
@@ -20,14 +20,15 @@ config.read(f"{home}/.elk_setup/config.ini")
 
 class Logger(object):
 
-    NOW = datetime.now()
-    NOW_DATE_STR = NOW.strftime("%Y-%m-%d")
+    # NOW = datetime.now()
+    # NOW_DATE_STR = NOW.strftime("%Y-%m-%d")
     FORMAT = "%(levelname)s %(asctime)-15s %(_server_ip)s %(_port)s %(_filename)s:%(_function)s:%(_line)d %(message)s"
     
     LOGGINGFILE = config["Logging"].get("LOGGINGFILE", "default.log")
     LOGGINGLEVEL = config["Logging"].get("LOGGINGLEVEL", "INFO")
 
-    LOG_PATH = f"{home}/logs/{NOW_DATE_STR}-{LOGGINGFILE}"
+    # LOG_PATH = f"{home}/logs/{NOW_DATE_STR}-{LOGGINGFILE}"
+    LOG_PATH = f"{home}/logs/{LOGGINGFILE}"
     LOG_LEVEL = logging._nameToLevel[LOGGINGLEVEL]
 
     def __init__(self, logger_name=__name__, log_path=LOG_PATH, port="0000"):
