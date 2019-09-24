@@ -59,7 +59,7 @@ filter {
 // web foramt
 filter {
   grok {
-    match => { "message" => "%{LOGLEVEL:web_level} %{TIMESTAMP_ISO8601:web_timestamp} %{IP:web_server_ip} %{PROG:web_port} %{PATH:web_code_path} %{WORD:web_method} %{IP:web_client_ip} %{USER:web_username} %{GREEDYDATA:web_data}" }
+    match => { "message" => "%{LOGLEVEL:level} %{TIMESTAMP_ISO8601:timestamp} %{IP:server_ip} %{PROG:port} %{PATH:code_path} %{WORD:method} %{URIPATHPARAM:uri_path} %{IP:client_ip} %{USER:username} %{GREEDYDATA:data}" }
   }
   date {
     match => [ "web_timestamp", "yyyy-MM-dd'T'kk:mm:ss.SSS", "yyyy-MM-dd kk:mm:ss,SSS" ]
