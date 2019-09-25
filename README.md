@@ -18,11 +18,11 @@ elk:
     - "5044:5044"
 ```
 ### Commands
-```
+```bash
 docker-compose up elk
 docker-compose up ubuntu
 ```
-```
+```bash
 docker run -p 5601:5601 -p 9200:9200 -p 5044:5044 -it --ulimit nofile=1024:65536 --name elk sebp/elk
 ```
 
@@ -128,7 +128,7 @@ server.rewriteBasePath: true
 ```
 
 ## Run Test Code
-```sh
+```bash
 pip install -r code/requirements.txt
 python code/log_generator.py -m web
 ```
